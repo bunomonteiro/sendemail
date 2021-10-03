@@ -16,8 +16,12 @@ namespace SendEmail
 {
   public class Program
   {
-    static IConfigurationRoot Configuration;
-    static IServiceProvider ServiceProvider;
+    private static IConfigurationRoot Configuration;
+    private static IServiceProvider ServiceProvider;
+
+    protected Program()
+    {
+    }
 
     /// <example>
     /// args = new string[] { "--param_1", "value_1", "--param_2", "value_2", "..." };
@@ -38,7 +42,7 @@ namespace SendEmail
       });
     }
 
-    static void Prepare()
+    private static void Prepare()
     {
       Log.Logger = new LoggerConfiguration()
            .WriteTo.Console(Serilog.Events.LogEventLevel.Debug)
@@ -51,26 +55,27 @@ namespace SendEmail
       ServiceProvider = serviceCollection.BuildServiceProvider();
     }
 
-    static void SendEmail(EmailConfiguration options)
+    private static void SendEmail(EmailConfiguration options)
     {
-      //Log.Information("Attachments: " + string.Join(",", options.Attachments));
-      //Log.Information("Subject: " + string.Join(",", options.Subject));
-      //Log.Information("Body: " + string.Join(",", options.Body));
-      //Log.Information("IsBodyHtml: " + string.Join(",", options.IsBodyHtml));
+#if DEBUG
+      Log.Information("Attachments: " + string.Join(",", options.Attachments));
+      Log.Information("Subject: " + string.Join(",", options.Subject));
+      Log.Information("Body: " + string.Join(",", options.Body));
+      Log.Information("IsBodyHtml: " + string.Join(",", options.IsBodyHtml));
 
-      //Log.Information("From.Address: " + string.Join(",", options.From.Address));
-      //Log.Information("From.Name: " + string.Join(",", options.From.Name));
+      Log.Information("From.Address: " + string.Join(",", options.From.Address));
+      Log.Information("From.Name: " + string.Join(",", options.From.Name));
 
-      //Log.Information("To.Address: " + string.Join(",", options.To.Select(t => t.Address)));
-      //Log.Information("To.Name: " + string.Join(",", options.To.Select(t => t.Name)));
+      Log.Information("To.Address: " + string.Join(",", options.To.Select(t => t.Address)));
+      Log.Information("To.Name: " + string.Join(",", options.To.Select(t => t.Name)));
 
-      //Log.Information("Smtp.Port: " + string.Join(",", options.Smtp.Port));
-      //Log.Information("Smtp.Host: " + string.Join(",", options.Smtp.Host));
-      //Log.Information("Smtp.Username: " + string.Join(",", options.Smtp.Username));
-      //Log.Information("Smtp.Password: " + string.Join(",", options.Smtp.Password));
-      //Log.Information("Smtp.EnableSsl: " + string.Join(",", options.Smtp.EnableSsl));
-      //Log.Information("Smtp.UseDefaultCredentials: " + string.Join(",", options.Smtp.UseDefaultCredentials));
-
+      Log.Information("Smtp.Port: " + string.Join(",", options.Smtp.Port));
+      Log.Information("Smtp.Host: " + string.Join(",", options.Smtp.Host));
+      Log.Information("Smtp.Username: " + string.Join(",", options.Smtp.Username));
+      Log.Information("Smtp.Password: " + string.Join(",", options.Smtp.Password));
+      Log.Information("Smtp.EnableSsl: " + string.Join(",", options.Smtp.EnableSsl));
+      Log.Information("Smtp.UseDefaultCredentials: " + string.Join(",", options.Smtp.UseDefaultCredentials));
+#endif
       try
       {
         Log.Information("Preparing email...");
@@ -121,7 +126,6 @@ namespace SendEmail
 
     private static void ConfigureServices(IServiceCollection serviceCollection)
     {
-
       serviceCollection.AddLogging();
 
       // Build configuration

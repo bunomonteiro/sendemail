@@ -4,14 +4,13 @@ namespace SendEmail
 {
   public class EmailConfiguration
   {
-    public PersonConfiguration From { get; set; }
-    public List<PersonConfiguration> To { get; set; }
-    public string Subject { get; set; }
-    public string Body { get; set; }
-    public bool? IsBodyHtml { get; set; }
     public List<string> Attachments { get; set; }
-
+    public string Body { get; set; }
+    public PersonConfiguration From { get; set; }
+    public bool? IsBodyHtml { get; set; }
     public SmtpServerConfiguration Smtp { get; set; }
+    public string Subject { get; set; }
+    public List<PersonConfiguration> To { get; set; }
 
     public EmailConfiguration()
     {

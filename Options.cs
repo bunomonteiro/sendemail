@@ -8,38 +8,49 @@ namespace SendEmail
   public class Options
   {
     #region Smtp
-    [Option('P', "port", Required = false, HelpText = "Sets the port used for SMTP transactions.")]
-    public int? Port { get; set; }
-    [Option('H', "host", Required = false, HelpText = "Sets the name or IP address of the host used for SMTP transactions.")]
-    public string Host { get; set; }
+
     [Option('S', "ssl", Required = false, HelpText = "Specify whether the SMTP uses Secure Sockets Layer (SSL) to encrypt the connection.")]
     public bool? EnableSsl { get; set; }
-    [Option("default-credentials", Required = false, HelpText = "Sets a boolean value that controls whether the DefaultCredentials are sent with requests")]
-    public bool? UseDefaultCredentials { get; set; }
-    [Option('u', "username", Required = false, HelpText = "Sets the user name associated with the credentials.")]
-    public string Username { get; set; }
+
+    [Option('H', "host", Required = false, HelpText = "Sets the name or IP address of the host used for SMTP transactions.")]
+    public string Host { get; set; }
+
     [Option('p', "password", Required = false, HelpText = "Sets the password for the user name associated with the credentials.")]
     public string Password { get; set; }
-    #endregion
+
+    [Option('P', "port", Required = false, HelpText = "Sets the port used for SMTP transactions.")]
+    public int? Port { get; set; }
+
+    [Option("default-credentials", Required = false, HelpText = "Sets a boolean value that controls whether the DefaultCredentials are sent with requests")]
+    public bool? UseDefaultCredentials { get; set; }
+
+    [Option('u', "username", Required = false, HelpText = "Sets the user name associated with the credentials.")]
+    public string Username { get; set; }
+
+    #endregion Smtp
 
     #region From
+
     [Option('f', "from.address", Required = false, HelpText = "Sets the \"from\" address for this email message.")]
     public string FromAddress { get; set; }
 
     [Option("from.name", Required = false, HelpText = "Sets the \"from\" display name for this email message.")]
     public string FromName { get; set; }
-    #endregion
+
+    #endregion From
 
     #region To
+
     [Option('t', "to.address", Required = false, HelpText = "Sets the list of \"to\" address for this email message.")]
     public IEnumerable<string> ToAddress { get; set; }
 
     [Option("to.name", Required = false, HelpText = "Sets the list of \"To\" display names for this email message.")]
     public IEnumerable<string> ToName { get; set; }
-    #endregion
 
-    [Option('s', "subject", Required = false, HelpText = "Sets the subject line for this email message.")]
-    public string Subject { get; set; }
+    #endregion To
+
+    [Option('a', "attachments", Required = false, HelpText = "It is a list of paths that defines the collection of attachments used to store data attached to this email message.")]
+    public IEnumerable<string> Attachments { get; set; }
 
     [Option('b', "body", Required = false, HelpText = "Sets the message body.")]
     public string Body { get; set; }
@@ -47,9 +58,8 @@ namespace SendEmail
     [Option('h', "html", Required = false, HelpText = "Sets a value indicating whether the mail message body is in HTML.")]
     public bool? IsBodyHtml { get; set; }
 
-    [Option('a', "attachments", Required = false, HelpText = "It is a list of paths that defines the collection of attachments used to store data attached to this email message.")]
-    public IEnumerable<string> Attachments { get; set; }
-
+    [Option('s', "subject", Required = false, HelpText = "Sets the subject line for this email message.")]
+    public string Subject { get; set; }
 
     public Options()
     {
