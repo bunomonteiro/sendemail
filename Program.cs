@@ -110,7 +110,7 @@ namespace SendEmail
         smtp.Host = options.Smtp.Host ?? configuration.Smtp.Host;
         smtp.EnableSsl = options.Smtp.EnableSsl.HasValue ? options.Smtp.EnableSsl.Value : configuration.Smtp.EnableSsl.Value;
         smtp.UseDefaultCredentials = options.Smtp.UseDefaultCredentials.HasValue ? options.Smtp.UseDefaultCredentials.Value : configuration.Smtp.UseDefaultCredentials.Value;
-        smtp.Credentials = new NetworkCredential(options.Smtp.Password ?? configuration.Smtp.Username, options.Smtp.Password ?? configuration.Smtp.Password);
+        smtp.Credentials = new NetworkCredential(options.Smtp.Username ?? configuration.Smtp.Username, options.Smtp.Password ?? configuration.Smtp.Password);
         smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
 
         Log.Information("Sending email...");
